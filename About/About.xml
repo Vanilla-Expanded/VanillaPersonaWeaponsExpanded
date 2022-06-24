@@ -1,0 +1,38 @@
+<ModMetaData>
+	<name>Vanilla Persona Weapons Expanded</name>
+	<author>Oskar Potocki, Taranchuk</author>
+	<supportedVersions>
+		<li>1.3</li>
+	</supportedVersions>
+	<modDependencies>
+		<li>
+			<packageId>brrainz.harmony</packageId>
+			<displayName>Harmony</displayName>
+			<steamWorkshopUrl>steam://url/CommunityFilePage/2009463077</steamWorkshopUrl>
+			<downloadUrl>https://github.com/pardeike/HarmonyRimWorld/releases/latest</downloadUrl>
+		</li>
+		<li>
+			<packageId>Ludeon.RimWorld.Royalty</packageId>
+			<displayName>Royalty</displayName>
+		</li>
+		<li>
+			<packageId>OskarPotocki.VanillaFactionsExpanded.Core</packageId>
+			<displayName>Vanilla Expanded Framework</displayName>
+			<steamWorkshopUrl>https://steamcommunity.com/sharedfiles/filedetails/?id=1854607105</steamWorkshopUrl>
+		</li>
+	</modDependencies>
+	<packageId>VanillaExpanded.VPersonaWeaponsE</packageId>
+	<loadAfter>
+		<li>Ludeon.RimWorld</li>
+		<li>Ludeon.RimWorld.Royalty</li>
+		<li>brrainz.harmony</li>
+		<li>OskarPotocki.VanillaFactionsExpanded.Core</li>
+		<li>vanillaexpanded.achievements</li>
+	</loadAfter>
+	<description>Vanilla Persona Weapons Expanded is a mod that makes persona weapons a little bit more spicy - but only visually so. It never felt right that such a unique weapon does not actually look that unique - you can meet dozens of imperial royals, and all their persona weapons will just look like copies of themselves. I mean, you’d probably customize your own weapon to be a bit more unique if you had it, am I right? 
+	
+With this mod, players not only are guaranteed a persona weapon of their choice and design upon reaching a rank of a Baron/Baroness, but every persona weapon in the game will now have a unique look. There is over 50 thousand different combinations, so I really doubt you will see the same looking persona weapon twice.
+
+This mod requires Royalty DLC.
+</description>
+</ModMetaData>
