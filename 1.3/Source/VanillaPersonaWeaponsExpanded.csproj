@@ -32,6 +32,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="GraphicCustomization">
+      <HintPath>..\..\..\VanillaExpandedFramework\1.3\Assemblies\GraphicCustomization.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -42,8 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ChoiceLetter_ChoosePersonaWeapon.cs" />
+    <Compile Include="Dialog_ChoosePersonaWeapon.cs" />
+    <Compile Include="GameComponent_PersonaWeapons.cs" />
     <Compile Include="VanillaPersonaWeaponsExpandedMod.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="VPWE_DefOf.cs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Krafs.Publicizer">
