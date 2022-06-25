@@ -84,11 +84,16 @@ namespace VanillaPersonaWeaponsExpanded
             var confirmRect = new Rect((inRect.width / 2f) + 5, inRect.height - 32, 250, 32);
             DrawConfirmButton(confirmRect, "VPWE.ClaimFor".Translate(pawn.Named("PAWN")), delegate
             {
-                
                 if (compGeneratedName != null)
                 {
                     compGeneratedName.name = currentName;
                 }
+                var compBladelink = currentWeapon.TryGetComp<CompBladelinkWeapon>();
+                compBladelink.traits.Clear();
+                compBladelink.traits.Add(this.currentWeaponTrait);
+                compBladelink.CodeFor(this.pawn);
+                DropPodUtility.DropThingsNear(pawn.Map.Center, pawn.Map, new List<Thing> { currentWeapon }, 110, canInstaDropDuringInit: false, leaveSlag: true);
+                Current.Game.GetComponent<GameComponent_PersonaWeapons>().unresolvedLetters.Remove(choiceLetter);
                 this.Close();
             });
         }

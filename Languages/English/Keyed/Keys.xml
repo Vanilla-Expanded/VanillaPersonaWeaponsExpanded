@@ -9,5 +9,5 @@ The weapon will arrive immediately via drop pod and will be bound to {PAWN_nameD
 	<VPWE.Postpone>Postpone</VPWE.Postpone>
 	<VPWE.ClaimFor>Claim for {PAWN_nameDef}</VPWE.ClaimFor>
 	<VPWE.Persona>Persona: </VPWE.Persona>
-
+	<VPWE.AlreadyBondedWarning>{PAWN_nameDef} is already bonded with {1}. Are you sure you want to claim a new persona weapon?</VPWE.AlreadyBondedWarning>
 </LanguageData>

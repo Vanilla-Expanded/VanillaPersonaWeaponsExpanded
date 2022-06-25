@@ -58,23 +58,39 @@ namespace VanillaPersonaWeaponsExpanded
 			return new DiaOption("VPWE.ClaimWeapon".Translate(weaponDef.LabelCap))
 			{
 				action = delegate
-				{
-					Find.LetterStack.RemoveLetter(this);
-					this.tickWhenOpened = Find.TickManager.TicksGame;
-                    var weapon = ThingMaker.MakeThing(weaponDef, GenStuff.DefaultStuffFor(weaponDef));
-                    var allWeapons = new List<Thing>
+                {
+                    if (pawn.equipment.Primary != null && pawn.equipment.Primary.TryGetComp<CompBladelinkWeapon>() != null)
                     {
-                        weapon
-                    };
-                    foreach (var otherDef in AllPersonaWeapons.Where(x => x != weaponDef))
-                    {
-                        allWeapons.Add(ThingMaker.MakeThing(otherDef, GenStuff.DefaultStuffFor(otherDef)));
+                        Find.WindowStack.Add(new Dialog_MessageBox("VPWE.AlreadyBondedWarning".Translate(pawn.Named("PAWN"),
+                            pawn.equipment.Primary.Label), "Yes".Translate(), delegate
+                            {
+                                OpenChooseDialog(weaponDef);
+                            }, "No".Translate()));
                     }
-                    Find.WindowStack.Add(new Dialog_ChoosePersonaWeapon(this, allWeapons, weapon.TryGetComp<CompGraphicCustomization>(), pawn));
+                    else
+                    {
+                        OpenChooseDialog(weaponDef);
+                    }
                 },
 				resolveTree = true
 			};
 		}
+
+        private void OpenChooseDialog(ThingDef weaponDef)
+        {
+            Find.LetterStack.RemoveLetter(this);
+            this.tickWhenOpened = Find.TickManager.TicksGame;
+            var weapon = ThingMaker.MakeThing(weaponDef, GenStuff.DefaultStuffFor(weaponDef));
+            var allWeapons = new List<Thing>
+                    {
+                        weapon
+                    };
+            foreach (var otherDef in AllPersonaWeapons.Where(x => x != weaponDef))
+            {
+                allWeapons.Add(ThingMaker.MakeThing(otherDef, GenStuff.DefaultStuffFor(otherDef)));
+            }
+            Find.WindowStack.Add(new Dialog_ChoosePersonaWeapon(this, allWeapons, weapon.TryGetComp<CompGraphicCustomization>(), pawn));
+        }
 
         public override void ExposeData()
         {

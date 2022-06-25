@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using RimWorld;
+using System.Collections.Generic;
 using Verse;
 
 namespace VanillaPersonaWeaponsExpanded
@@ -18,7 +19,7 @@ namespace VanillaPersonaWeaponsExpanded
                 if (!Find.LetterStack.LettersListForReading.Contains(letter))
                 {
                     var diff = Find.TickManager.TicksGame - letter.tickWhenOpened;
-                    if (diff >= 60)
+                    if (diff >= GenDate.TicksPerDay * 7)
                     {
                         Find.LetterStack.ReceiveLetter(letter);
                     }
