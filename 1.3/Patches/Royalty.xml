@@ -7,6 +7,12 @@
 		<match Class="PatchOperationSequence">
 			<operations>
 
+				<!-- remove the red tint color from bladelink weapons -->
+				
+				<li Class="PatchOperationRemove">
+					<xpath>/Defs/ThingDef[defName="MeleeWeapon_MonoSwordBladelink" or defName="MeleeWeapon_PlasmaSwordBladelink" or defName="MeleeWeapon_ZeusHammerBladelink"]/graphicData/color</xpath>
+				</li>
+				
 				<!-- monosword -->
 				
 				<li Class="PatchOperationConditional">
@@ -642,83 +648,158 @@
 											<texName>Bore</texName>
 											<outline>Zeushammer/Zeushammer_HeadLeft_Bore_Outline</outline>
 											<texture>Zeushammer/Zeushammer_HeadLeft_Bore</texture>
+											<textureVariantOverride>
+												<chance>0.5</chance>
+												<groupName>Right head</groupName>
+												<texName>Bore</texName>
+											</textureVariantOverride>
 										</li>
 										<li>
 											<texName>Chaos</texName>
 											<outline>Zeushammer/Zeushammer_HeadLeft_Chaos_Outline</outline>
 											<texture>Zeushammer/Zeushammer_HeadLeft_Chaos</texture>
+											<textureVariantOverride>
+												<chance>0.5</chance>
+												<groupName>Right head</groupName>
+												<texName>Chaos</texName>
+											</textureVariantOverride>
 										</li>
 										<li>
 											<texName>Compound</texName>
 											<outline>Zeushammer/Zeushammer_HeadLeft_Compound_Outline</outline>
 											<texture>Zeushammer/Zeushammer_HeadLeft_Compound</texture>
+											<textureVariantOverride>
+												<chance>0.5</chance>
+												<groupName>Right head</groupName>
+												<texName>Compound</texName>
+											</textureVariantOverride>
 										</li>
 										<li>
 											<texName>Driver</texName>
 											<outline>Zeushammer/Zeushammer_HeadLeft_Driver_Outline</outline>
 											<texture>Zeushammer/Zeushammer_HeadLeft_Driver</texture>
+											<textureVariantOverride>
+												<chance>0.5</chance>
+												<groupName>Right head</groupName>
+												<texName>Driver</texName>
+											</textureVariantOverride>
 										</li>
 										<li>
 											<texName>Foreign</texName>
 											<outline>Zeushammer/Zeushammer_HeadLeft_Foreign_Outline</outline>
 											<texture>Zeushammer/Zeushammer_HeadLeft_Foreign</texture>
+											<textureVariantOverride>
+												<chance>0.5</chance>
+												<groupName>Right head</groupName>
+												<texName>Foreign</texName>
+											</textureVariantOverride>
 										</li>
 										<li>
 											<texName>Impact</texName>
 											<outline>Zeushammer/Zeushammer_HeadLeft_Impact_Outline</outline>
 											<texture>Zeushammer/Zeushammer_HeadLeft_Impact</texture>
+											<textureVariantOverride>
+												<chance>0.5</chance>
+												<groupName>Right head</groupName>
+												<texName>Impact</texName>
+											</textureVariantOverride>
 										</li>
 										<li>
 											<texName>Incensed</texName>
 											<outline>Zeushammer/Zeushammer_HeadLeft_Incensed_Outline</outline>
 											<texture>Zeushammer/Zeushammer_HeadLeft_Incensed</texture>
+											<textureVariantOverride>
+												<chance>0.5</chance>
+												<groupName>Right head</groupName>
+												<texName>Incensed</texName>
+											</textureVariantOverride>
 										</li>
 										<li>
 											<texName>Isolated</texName>
 											<outline>Zeushammer/Zeushammer_HeadLeft_Isolated_Outline</outline>
 											<texture>Zeushammer/Zeushammer_HeadLeft_Isolated</texture>
+											<textureVariantOverride>
+												<chance>0.5</chance>
+												<groupName>Right head</groupName>
+												<texName>Isolated</texName>
+											</textureVariantOverride>
 										</li>
 										<li>
 											<texName>Massive</texName>
 											<outline>Zeushammer/Zeushammer_HeadLeft_Massive_Outline</outline>
 											<texture>Zeushammer/Zeushammer_HeadLeft_Massive</texture>
+											<textureVariantOverride>
+												<chance>0.5</chance>
+												<groupName>Right head</groupName>
+												<texName>Massive</texName>
+											</textureVariantOverride>
 										</li>
 										<li>
 											<texName>Piledriver</texName>
 											<outline>Zeushammer/Zeushammer_HeadLeft_Piledriver_Outline</outline>
 											<texture>Zeushammer/Zeushammer_HeadLeft_Piledriver</texture>
+											<textureVariantOverride>
+												<chance>0.5</chance>
+												<groupName>Right head</groupName>
+												<texName>Piledriver</texName>
+											</textureVariantOverride>
 										</li>
 										<li>
 											<texName>Polarized</texName>
 											<outline>Zeushammer/Zeushammer_HeadLeft_Polarized_Outline</outline>
 											<texture>Zeushammer/Zeushammer_HeadLeft_Polarized</texture>
+											<textureVariantOverride>
+												<chance>0.5</chance>
+												<groupName>Right head</groupName>
+												<texName>Polarized</texName>
+											</textureVariantOverride>
 										</li>
 										<li>
 											<texName>Ridge</texName>
 											<outline>Zeushammer/Zeushammer_HeadLeft_Ridge_Outline</outline>
 											<texture>Zeushammer/Zeushammer_HeadLeft_Ridge</texture>
+											<textureVariantOverride>
+												<chance>0.5</chance>
+												<groupName>Right head</groupName>
+												<texName>Ridge</texName>
+											</textureVariantOverride>
 										</li>
 										<li>
 											<texName>Shockwave</texName>
 											<outline>Zeushammer/Zeushammer_HeadLeft_Shockwave_Outline</outline>
 											<texture>Zeushammer/Zeushammer_HeadLeft_Shockwave</texture>
+											<textureVariantOverride>
+												<chance>0.5</chance>
+												<groupName>Right head</groupName>
+												<texName>Shockwave</texName>
+											</textureVariantOverride>
 										</li>
 										<li>
 											<texName>Signal</texName>
 											<outline>Zeushammer/Zeushammer_HeadLeft_Signal_Outline</outline>
 											<texture>Zeushammer/Zeushammer_HeadLeft_Signal</texture>
+											<textureVariantOverride>
+												<chance>0.5</chance>
+												<groupName>Right head</groupName>
+												<texName>Signal</texName>
+											</textureVariantOverride>
 										</li>
 										<li>
 											<texName>Talon</texName>
 											<outline>Zeushammer/Zeushammer_HeadLeft_Talon_Outline</outline>
 											<texture>Zeushammer/Zeushammer_HeadLeft_Talon</texture>
+											<textureVariantOverride>
+												<chance>0.5</chance>
+												<groupName>Right head</groupName>
+												<texName>Talon</texName>
+											</textureVariantOverride>
 										</li>
 									</texVariants>
 								</li>
 								<li>
-									<name>right head</name>
+									<name>Right head</name>
 									<texVariants>
-																			<li>
+										<li>
 											<texName>Bore</texName>
 											<outline>Zeushammer/Zeushammer_HeadRight_Bore_Outline</outline>
 											<texture>Zeushammer/Zeushammer_HeadRight_Bore</texture>
