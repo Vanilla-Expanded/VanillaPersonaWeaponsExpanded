@@ -77,7 +77,7 @@ namespace VanillaPersonaWeaponsExpanded
             Widgets.EndScrollView();
 
             var cancelRect = new Rect((inRect.width / 2f) - 155, inRect.height - 32, 150, 32);
-            if (Widgets.ButtonText(cancelRect, "Cancel".Translate()))
+            if (Widgets.ButtonText(cancelRect, "VEF.Cancel".Translate()))
             {
                 this.Close();
             }
