@@ -94,6 +94,7 @@ namespace VanillaPersonaWeaponsExpanded
                 compBladelink.CodeFor(this.pawn);
                 DropPodUtility.DropThingsNear(pawn.Map.Center, pawn.Map, new List<Thing> { currentWeapon }, 110, canInstaDropDuringInit: false, leaveSlag: true);
                 Current.Game.GetComponent<GameComponent_PersonaWeapons>().unresolvedLetters.Remove(choiceLetter);
+                Find.Archive.Remove(choiceLetter);
                 this.Close();
             });
         }
