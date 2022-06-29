@@ -14,14 +14,22 @@ namespace VanillaPersonaWeaponsExpanded
         public override void GameComponentTick()
         {
             base.GameComponentTick();
-            foreach (var letter in unresolvedLetters)
+            for (var i = unresolvedLetters.Count - 1; i >= 0; i--)
             {
+                var letter = unresolvedLetters[i];
                 if (!Find.LetterStack.LettersListForReading.Contains(letter))
                 {
                     var diff = Find.TickManager.TicksGame - letter.tickWhenOpened;
                     if (diff >= GenDate.TicksPerDay * 7)
                     {
-                        Find.LetterStack.ReceiveLetter(letter);
+                        if (letter.pawn.IsColonist)
+                        {
+                            Find.LetterStack.ReceiveLetter(letter);
+                        }
+                        else
+                        {
+                            unresolvedLetters.RemoveAt(i);
+                        }
                     }
                 }
             }
