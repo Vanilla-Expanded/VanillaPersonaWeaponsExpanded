@@ -24,7 +24,11 @@ namespace VanillaPersonaWeaponsExpanded
                     {
                         if (letter.pawn.IsColonist)
                         {
-                            Find.LetterStack.ReceiveLetter(letter);
+                            var map = letter.pawn.MapHeld ?? Find.AnyPlayerHomeMap;
+                            if (map != null)
+                            {
+                                Find.LetterStack.ReceiveLetter(letter);
+                            }
                         }
                         else
                         {
