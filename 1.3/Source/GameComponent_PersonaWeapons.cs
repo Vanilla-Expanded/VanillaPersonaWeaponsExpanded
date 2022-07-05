@@ -17,25 +17,33 @@ namespace VanillaPersonaWeaponsExpanded
             for (var i = unresolvedLetters.Count - 1; i >= 0; i--)
             {
                 var letter = unresolvedLetters[i];
-                if (!Find.LetterStack.LettersListForReading.Contains(letter))
+                if (letter?.pawn is null)
                 {
-                    var diff = Find.TickManager.TicksGame - letter.tickWhenOpened;
-                    if (diff >= GenDate.TicksPerDay * 7)
+                    unresolvedLetters.RemoveAt(i);
+                }
+                else
+                {
+                    if (!Find.LetterStack.LettersListForReading.Contains(letter))
                     {
-                        if (letter.pawn.IsColonist)
+                        var diff = Find.TickManager.TicksGame - letter.tickWhenOpened;
+                        if (diff >= GenDate.TicksPerDay * 7)
                         {
-                            var map = letter.pawn.MapHeld ?? Find.AnyPlayerHomeMap;
-                            if (map != null)
+                            if (letter.pawn.IsColonist)
                             {
-                                Find.LetterStack.ReceiveLetter(letter);
+                                var map = letter.pawn.MapHeld ?? Find.AnyPlayerHomeMap;
+                                if (map != null)
+                                {
+                                    Find.LetterStack.ReceiveLetter(letter);
+                                }
                             }
-                        }
-                        else
-                        {
-                            unresolvedLetters.RemoveAt(i);
+                            else
+                            {
+                                unresolvedLetters.RemoveAt(i);
+                            }
                         }
                     }
                 }
+
             }
         }
 

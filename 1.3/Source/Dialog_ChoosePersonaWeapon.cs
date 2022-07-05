@@ -94,6 +94,7 @@ namespace VanillaPersonaWeaponsExpanded
                 compBladelink.CodeFor(this.pawn);
                 var map = pawn.MapHeld ?? Find.AnyPlayerHomeMap;
                 DropPodUtility.DropThingsNear(map.Center, map, new List<Thing> { currentWeapon }, 110, canInstaDropDuringInit: false, leaveSlag: true);
+                Find.LetterStack.ReceiveLetter("VPWE.ReceivedWeaponTitle".Translate(), "VPWE.ReceivedWeaponDesc".Translate(currentWeapon.Label, pawn.Named("PAWN")), LetterDefOf.NeutralEvent, currentWeapon);
                 Current.Game.GetComponent<GameComponent_PersonaWeapons>().unresolvedLetters.Remove(choiceLetter);
                 Find.Archive.Remove(choiceLetter);
                 this.Close();
