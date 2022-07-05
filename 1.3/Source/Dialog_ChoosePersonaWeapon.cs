@@ -84,6 +84,8 @@ namespace VanillaPersonaWeaponsExpanded
             var confirmRect = new Rect((inRect.width / 2f) + 5, inRect.height - 32, 250, 32);
             DrawConfirmButton(confirmRect, "VPWE.ClaimFor".Translate(pawn.Named("PAWN")), delegate
             {
+                this.comp.texVariantsToCustomize = this.currentVariants;
+                this.comp.Customize();
                 if (compGeneratedName != null)
                 {
                     compGeneratedName.name = currentName;
@@ -93,6 +95,11 @@ namespace VanillaPersonaWeaponsExpanded
                 compBladelink.traits.Add(this.currentWeaponTrait);
                 compBladelink.CodeFor(this.pawn);
                 var map = pawn.MapHeld ?? Find.AnyPlayerHomeMap;
+                var qualityComp = currentWeapon.TryGetComp<CompQuality>();
+                if (qualityComp != null)
+                {
+                    qualityComp.SetQuality(QualityCategory.Excellent, ArtGenerationContext.Outsider);
+                }
                 DropPodUtility.DropThingsNear(map.Center, map, new List<Thing> { currentWeapon }, 110, canInstaDropDuringInit: false, leaveSlag: true);
                 Find.LetterStack.ReceiveLetter("VPWE.ReceivedWeaponTitle".Translate(), "VPWE.ReceivedWeaponDesc".Translate(currentWeapon.Label, pawn.Named("PAWN")), LetterDefOf.NeutralEvent, currentWeapon);
                 Current.Game.GetComponent<GameComponent_PersonaWeapons>().unresolvedLetters.Remove(choiceLetter);
