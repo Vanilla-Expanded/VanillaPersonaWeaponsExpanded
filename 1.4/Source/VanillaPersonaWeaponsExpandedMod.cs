@@ -18,9 +18,12 @@ namespace VanillaPersonaWeaponsExpanded
     {
         public static void Postfix(Pawn_RoyaltyTracker __instance, Faction faction, RoyalTitleDef prevTitle, RoyalTitleDef newTitle)
         {
-            if (__instance.pawn.IsColonist && (prevTitle is null || prevTitle.seniority < newTitle.seniority) && (newTitle == VPWE_DefOf.Baron 
-                || prevTitle is null && newTitle.seniority > VPWE_DefOf.Baron.seniority) && faction == Faction.OfEmpire)
+            if (__instance.pawn.IsColonist && PawnGenerator.IsBeingGenerated(__instance.pawn) is false && Current.CreatingWorld is null
+                && __instance.pawn.Dead is false && (prevTitle is null || prevTitle.seniority < newTitle.seniority) 
+                && (newTitle == VPWE_DefOf.Baron || prevTitle is null && newTitle.seniority > VPWE_DefOf.Baron.seniority) 
+                && faction == Faction.OfEmpire)
             {
+
                 var letter = LetterMaker.MakeLetter("VPWE.GainedPersonaWeaponTitle".Translate(__instance.pawn.Named("PAWN")),
                     "VPWE.GainedPersonaWeaponDesc".Translate(__instance.pawn.Named("PAWN"), newTitle.GetLabelFor(__instance.pawn.gender)),
                     VPWE_DefOf.VPWE_ChoosePersonaWeapon, faction) as ChoiceLetter_ChoosePersonaWeapon;
