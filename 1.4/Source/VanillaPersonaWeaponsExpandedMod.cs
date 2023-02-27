@@ -18,7 +18,7 @@ namespace VanillaPersonaWeaponsExpanded
     {
         public static void Postfix(Pawn_RoyaltyTracker __instance, Faction faction, RoyalTitleDef prevTitle, RoyalTitleDef newTitle)
         {
-            if (__instance.pawn.IsColonist && PawnGenerator.IsBeingGenerated(__instance.pawn) is false && Current.CreatingWorld is null
+            if (newTitle != null && __instance.pawn.IsColonist && PawnGenerator.IsBeingGenerated(__instance.pawn) is false && Current.CreatingWorld is null
                 && __instance.pawn.Dead is false && (prevTitle is null || prevTitle.seniority < newTitle.seniority) 
                 && (newTitle == VPWE_DefOf.Baron || prevTitle is null && newTitle.seniority > VPWE_DefOf.Baron.seniority) 
                 && faction == Faction.OfEmpire)
