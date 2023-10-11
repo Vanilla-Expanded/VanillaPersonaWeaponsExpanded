@@ -21,8 +21,7 @@ namespace VanillaPersonaWeaponsExpanded
             {
                 foreach (var def in DefDatabase<ThingDef>.AllDefs)
                 {
-                    if (def.GetCompProperties<CompProperties_GraphicCustomization>() != null
-                        && def.GetCompProperties<CompProperties_BladelinkWeapon>() != null)
+                    if (def.GetCompProperties<CompProperties_BladelinkWeapon>() != null)
                     {
                         if (def.weaponTags != null && def.weaponTags.Any(x => x == "ExcludeFromEmpireTitleReward"))
                         {
@@ -93,7 +92,15 @@ namespace VanillaPersonaWeaponsExpanded
             {
                 allWeapons.Add(ThingMaker.MakeThing(otherDef, GenStuff.DefaultStuffFor(otherDef)));
             }
-            Find.WindowStack.Add(new Dialog_ChoosePersonaWeapon(this, allWeapons, weapon.TryGetComp<CompGraphicCustomization>(), pawn));
+            var comp = weapon.TryGetComp<CompGraphicCustomization>();
+            if (comp != null)
+            {
+                Find.WindowStack.Add(new Dialog_ChoosePersonaWeapon(this, allWeapons, comp, pawn));
+            }
+            else
+            {
+                Dialog_ChoosePersonaWeapon.SendWeapon(pawn, weapon.TryGetComp<CompBladelinkWeapon>(), weapon);
+            }
         }
 
         public override void ExposeData()

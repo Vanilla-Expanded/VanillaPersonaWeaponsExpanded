@@ -71,9 +71,9 @@ namespace VanillaPersonaWeaponsExpanded
             Rect outerRect = new Rect(inRect.x, floatMenuButtonsRect.yMax + 15, inRect.width, 430);
             Rect viewArea = new Rect(inRect.x, outerRect.y, inRect.width - 16, height);
             Rect itemTextureRect = new Rect(inRect.x + 10, viewArea.y, 250, 250);
-
+            DrawItem(itemTextureRect);
             Widgets.BeginScrollView(outerRect, ref scrollPosition, viewArea, true);
-            DrawArea(itemTextureRect);
+            DrawCustomizationArea(itemTextureRect);
             Widgets.EndScrollView();
 
             var cancelRect = new Rect((inRect.width / 2f) - 155, inRect.height - 32, 150, 32);
@@ -93,24 +93,30 @@ namespace VanillaPersonaWeaponsExpanded
                 var compBladelink = currentWeapon.TryGetComp<CompBladelinkWeapon>();
                 compBladelink.traits.Clear();
                 compBladelink.traits.Add(this.currentWeaponTrait);
-                compBladelink.CodeFor(this.pawn);
-                var map = pawn.MapHeld ?? Find.AnyPlayerHomeMap;
-                var qualityComp = currentWeapon.TryGetComp<CompQuality>();
-                if (qualityComp != null)
-                {
-                    qualityComp.SetQuality(QualityCategory.Excellent, ArtGenerationContext.Outsider);
-                }
-                DropPodUtility.DropThingsNear(map.Center, map, new List<Thing> { currentWeapon }, 110, canInstaDropDuringInit: false, leaveSlag: true);
-                Find.LetterStack.ReceiveLetter("VPWE.ReceivedWeaponTitle".Translate(), "VPWE.ReceivedWeaponDesc".Translate(currentWeapon.Label, pawn.Named("PAWN")), LetterDefOf.NeutralEvent, currentWeapon);
+                SendWeapon(pawn, compBladelink, currentWeapon); 
                 Current.Game.GetComponent<GameComponent_PersonaWeapons>().unresolvedLetters.Remove(choiceLetter);
                 Find.Archive.Remove(choiceLetter);
                 this.Close();
             });
         }
 
-        protected override void DrawArea(Rect itemTextureRect)
+        public static void SendWeapon(Pawn receiver, CompBladelinkWeapon compBladelink, Thing weaponToSend)
         {
-            base.DrawArea(itemTextureRect);
+            compBladelink.CodeFor(receiver);
+            var map = receiver.MapHeld ?? Find.AnyPlayerHomeMap;
+            var qualityComp = weaponToSend.TryGetComp<CompQuality>();
+            if (qualityComp != null)
+            {
+                qualityComp.SetQuality(QualityCategory.Excellent, ArtGenerationContext.Outsider);
+            }
+            DropPodUtility.DropThingsNear(map.Center, map, new List<Thing> { weaponToSend }, 110, canInstaDropDuringInit: false, leaveSlag: true);
+            Find.LetterStack.ReceiveLetter("VPWE.ReceivedWeaponTitle".Translate(), "VPWE.ReceivedWeaponDesc".Translate(weaponToSend.Label, receiver.Named("PAWN")), LetterDefOf.NeutralEvent, weaponToSend);
+        }
+
+        protected override void DrawCustomizationArea(Rect itemTextureRect)
+        {
+            base.DrawCustomizationArea(itemTextureRect);
+
             var personaTitleRect = new Rect(itemTextureRect.x, itemTextureRect.yMax + 26, 150, 24);
             Widgets.Label(personaTitleRect, "VPWE.Persona".Translate());
             var floatMenuButtonsRect = new Rect(personaTitleRect.x, personaTitleRect.yMax, 250, 32);
@@ -144,7 +150,7 @@ namespace VanillaPersonaWeaponsExpanded
                         currentWeaponTrait = allWeaponTraits[0];
                     }
                 });
-            
+
             var weaponTraitDescription = currentWeaponTrait.LabelCap + ": " + currentWeaponTrait.description.CapitalizeFirst();
             var height = Text.CalcHeight(weaponTraitDescription, floatMenuButtonsRect.width);
             var weaponTraitDescriptionRect = new Rect(floatMenuButtonsRect.x, floatMenuButtonsRect.yMax + 15, floatMenuButtonsRect.width, height);
