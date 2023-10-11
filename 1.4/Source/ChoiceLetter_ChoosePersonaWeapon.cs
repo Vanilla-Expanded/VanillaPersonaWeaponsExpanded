@@ -24,6 +24,10 @@ namespace VanillaPersonaWeaponsExpanded
                     if (def.GetCompProperties<CompProperties_GraphicCustomization>() != null
                         && def.GetCompProperties<CompProperties_BladelinkWeapon>() != null)
                     {
+                        if (def.weaponTags != null && def.weaponTags.Any(x => x == "ExcludeFromEmpireTitleReward"))
+                        {
+                            continue;
+                        }
                         yield return def;
                     }
                 }
