@@ -45,6 +45,14 @@ namespace VanillaPersonaWeaponsExpanded
             alreadyHad = false;
         }
 
+        public override void PostPostMake()
+        {
+            base.PostPostMake();
+            if (ModCompatibility.VPELoaded)
+            {
+                ability = ModCompatibility.AllPsycasts().RandomElement();
+            }
+        }
 
         public override IEnumerable<StatDrawEntry> SpecialDisplayStats()
         {
