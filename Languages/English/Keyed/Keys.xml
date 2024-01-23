@@ -12,4 +12,5 @@ The weapon will arrive immediately via drop pod and will be bound to {PAWN_nameD
 	<VPWE.AlreadyBondedWarning>{PAWN_nameDef} is already bonded with {1}. Are you sure you want to claim a new persona weapon?</VPWE.AlreadyBondedWarning>
 	<VPWE.ReceivedWeaponTitle>Cargo pods (Persona weapon)</VPWE.ReceivedWeaponTitle>
 	<VPWE.ReceivedWeaponDesc>{0} for {PAWN_nameDef} has arrived nearby.</VPWE.ReceivedWeaponDesc>
+	<VPWE.Psycast>Psycast: </VPWE.Psycast>
 </LanguageData>

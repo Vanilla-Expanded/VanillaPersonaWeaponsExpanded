@@ -9,9 +9,10 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>VanillaPersonaWeaponsExpanded</RootNamespace>
     <AssemblyName>VanillaPersonaWeaponsExpanded</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>false</DebugSymbols>
@@ -296,11 +297,22 @@
       <HintPath>..\..\..\..\RimWorldWin64_Data\Managed\UnityEngine.XRModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="VanillaPsycastsExpanded">
+      <HintPath>..\..\..\VanillaPsycastsExpanded\1.4\Assemblies\VanillaPsycastsExpanded.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="VFECore">
+      <HintPath>..\..\..\VanillaExpandedFramework\1.4\Assemblies\VFECore.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ChoiceLetter_ChoosePersonaWeapon.cs" />
+    <Compile Include="CompGraphicCustomization_PsychicWeapon.cs" />
     <Compile Include="Dialog_ChoosePersonaWeapon.cs" />
     <Compile Include="GameComponent_PersonaWeapons.cs" />
+    <Compile Include="ModCompatibility.cs" />
+    <Compile Include="PsycastFloatMenuOption.cs" />
     <Compile Include="VanillaPersonaWeaponsExpandedMod.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="VPWE_DefOf.cs" />
