@@ -23,6 +23,11 @@ namespace VanillaPersonaWeaponsExpanded
         public override void Notify_Equipped(Pawn pawn)
         {
             base.Notify_Equipped(pawn);
+            TryGiveAbility(pawn);
+        }
+
+        public void TryGiveAbility(Pawn pawn)
+        {
             if (ability is null || ModCompatibility.VPELoaded is false || ModCompatibility.PawnIsPsycaster(pawn) is false)
             {
                 return;

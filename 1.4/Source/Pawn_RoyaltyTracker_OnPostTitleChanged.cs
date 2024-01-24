@@ -5,14 +5,6 @@ using Verse;
 
 namespace VanillaPersonaWeaponsExpanded
 {
-    public class VanillaPersonaWeaponsExpandedMod : Mod
-    {
-        public VanillaPersonaWeaponsExpandedMod(ModContentPack pack) : base(pack)
-        {
-            new Harmony("VanillaPersonaWeaponsExpanded.Mod").PatchAll();
-        }
-    }
-
     [HarmonyPatch(typeof(Pawn_RoyaltyTracker), "OnPostTitleChanged")]
     public static class Pawn_RoyaltyTracker_OnPostTitleChanged
     {
