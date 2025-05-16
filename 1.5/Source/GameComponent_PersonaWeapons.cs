@@ -71,6 +71,9 @@ namespace VanillaPersonaWeaponsExpanded
             if (pawn.royalty == null || pawn.royalty.AllTitlesForReading.All(t => t.faction != Faction.OfEmpire || t.def.seniority < VPWE_DefOf.Baron.seniority))
                 return "VPWE.NotAllowedNoTitle".Translate(pawn.Named("PAWN"));
 
+            if (pawn.Faction != Faction.OfPlayer)
+                return "VPWE.NotPlayerFaction".Translate(pawn.Named("PAWN"));
+
             return AcceptanceReport.WasAccepted;
         }
     }

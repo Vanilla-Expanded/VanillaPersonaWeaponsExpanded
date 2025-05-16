@@ -17,4 +17,5 @@ The weapon will arrive immediately via drop pod and will be bound to {PAWN_nameD
 	<VPWE.ConfirmReject>Are you sure you want to reject a persona weapon for {PAWN_labelShort}? {PAWN_pronoun} won't be offered another one again.</VPWE.ConfirmReject>
 	<VPWE.NotAllowedDead>{PAWN_labelShort} is dead</VPWE.NotAllowedDead>
 	<VPWE.NotAllowedNoTitle>{PAWN_labelShort} no longer has the required title</VPWE.NotAllowedNoTitle>
+	<VPWE.NotPlayerFaction>{PAWN_labelShort} is no longer part of your faction</VPWE.NotPlayerFaction>
 </LanguageData>
