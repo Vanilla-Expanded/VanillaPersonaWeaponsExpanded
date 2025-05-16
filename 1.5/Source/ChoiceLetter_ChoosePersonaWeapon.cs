@@ -1,5 +1,4 @@
 ﻿using GraphicCustomization;
-using HarmonyLib;
 using RimWorld;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +11,6 @@ namespace VanillaPersonaWeaponsExpanded
 		public int tickWhenOpened;
 
         public Pawn pawn;
-        public override bool CanShowInLetterStack => base.CanShowInLetterStack;
         public override bool CanDismissWithRightClick => false;
 
         public IEnumerable<ThingDef> AllPersonaWeapons
@@ -35,10 +33,12 @@ namespace VanillaPersonaWeaponsExpanded
         public override IEnumerable<DiaOption> Choices
 		{
 			get
-			{
-				foreach (var def in AllPersonaWeapons)
+            {
+                var allowed = GameComponent_PersonaWeapons.IsAllowedToGetWeapon(pawn);
+
+                foreach (var def in AllPersonaWeapons)
                 {
-                    yield return Option_ChooseWeapon(def);
+                    yield return Option_ChooseWeapon(def, allowed);
                 }
                 yield return new DiaOption("VPWE.Postpone".Translate())
 				{
@@ -46,9 +46,27 @@ namespace VanillaPersonaWeaponsExpanded
                     {
 						this.tickWhenOpened = Find.TickManager.TicksGame;
                         Find.LetterStack.RemoveLetter(this);
-                    }
+                    },
+                    disabled = !allowed,
+                    disabledReason = allowed.Reason
 				};
-			}
+                yield return new DiaOption("VPWE.RejectLetter".Translate())
+                {
+                    resolveTree = true,
+                    action = () =>
+                    {
+                        if (allowed)
+                        {
+                            var dialog = Dialog_MessageBox.CreateConfirmation("VPWE.ConfirmReject".Translate(pawn.Named("PAWN")), RemoveAndResolveLetter, true);
+                            Find.WindowStack.Add(dialog);
+                        }
+                        else
+                        {
+                            RemoveAndResolveLetter();
+                        }
+                    }
+                };
+            }
 		}
 
         public override void OpenLetter()
@@ -56,7 +74,7 @@ namespace VanillaPersonaWeaponsExpanded
             base.OpenLetter();
             this.tickWhenOpened = Find.TickManager.TicksGame;
         }
-        private DiaOption Option_ChooseWeapon(ThingDef weaponDef)
+        private DiaOption Option_ChooseWeapon(ThingDef weaponDef, AcceptanceReport allowed)
 		{
 			return new DiaOption("VPWE.ClaimWeapon".Translate(weaponDef.LabelCap))
 			{
@@ -75,7 +93,9 @@ namespace VanillaPersonaWeaponsExpanded
                         OpenChooseDialog(weaponDef);
                     }
                 },
-				resolveTree = true
+				resolveTree = true,
+                disabled = !allowed,
+                disabledReason = allowed.Reason
 			};
 		}
 
@@ -84,23 +104,25 @@ namespace VanillaPersonaWeaponsExpanded
             Find.LetterStack.RemoveLetter(this);
             this.tickWhenOpened = Find.TickManager.TicksGame;
             var weapon = ThingMaker.MakeThing(weaponDef, GenStuff.DefaultStuffFor(weaponDef));
+            var comp = weapon.TryGetComp<CompGraphicCustomization>();
+            // If the weapon doesn't have customization comp, send the weapon and return early. No point in doing anything else.
+            if (comp == null)
+            {
+                Dialog_ChoosePersonaWeapon.SendWeapon(pawn, weapon.TryGetComp<CompBladelinkWeapon>(), weapon);
+                RemoveAndResolveLetter();
+                return;
+            }
+
             var allWeapons = new List<Thing>
                     {
                         weapon
                     };
-            foreach (var otherDef in AllPersonaWeapons.Where(x => x != weaponDef))
+            foreach (var otherDef in AllPersonaWeapons.Where(x => x != weaponDef && x.HasComp<CompGraphicCustomization>()))
             {
                 allWeapons.Add(ThingMaker.MakeThing(otherDef, GenStuff.DefaultStuffFor(otherDef)));
             }
-            var comp = weapon.TryGetComp<CompGraphicCustomization>();
-            if (comp != null)
-            {
-                Find.WindowStack.Add(new Dialog_ChoosePersonaWeapon(this, allWeapons, comp, pawn));
-            }
-            else
-            {
-                Dialog_ChoosePersonaWeapon.SendWeapon(pawn, weapon.TryGetComp<CompBladelinkWeapon>(), weapon);
-            }
+
+            Find.WindowStack.Add(new Dialog_ChoosePersonaWeapon(this, allWeapons, comp, pawn));
         }
 
         public override void ExposeData()
@@ -108,6 +130,12 @@ namespace VanillaPersonaWeaponsExpanded
             base.ExposeData();
 			Scribe_Values.Look(ref tickWhenOpened, "tickWhenOpened");
             Scribe_References.Look(ref pawn, "pawn");
+        }
+
+        private void RemoveAndResolveLetter()
+        {
+            Current.Game.GetComponent<GameComponent_PersonaWeapons>().unresolvedLetters.Remove(this);
+            Find.LetterStack.RemoveLetter(this);
         }
     }
 }

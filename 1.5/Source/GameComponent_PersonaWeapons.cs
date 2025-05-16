@@ -1,5 +1,6 @@
 ﻿using RimWorld;
 using System.Collections.Generic;
+using System.Linq;
 using Verse;
 
 namespace VanillaPersonaWeaponsExpanded
@@ -17,7 +18,7 @@ namespace VanillaPersonaWeaponsExpanded
             for (var i = unresolvedLetters.Count - 1; i >= 0; i--)
             {
                 var letter = unresolvedLetters[i];
-                if (letter?.pawn is null)
+                if (letter == null || !IsAllowedToGetWeapon(letter.pawn))
                 {
                     unresolvedLetters.RemoveAt(i);
                 }
@@ -55,6 +56,22 @@ namespace VanillaPersonaWeaponsExpanded
             {
                 unresolvedLetters ??= new List<ChoiceLetter_ChoosePersonaWeapon>();
             }
+        }
+
+        public static AcceptanceReport IsAllowedToGetWeapon(Pawn pawn)
+        {
+            if (pawn == null)
+                return AcceptanceReport.WasRejected;
+
+            // Check if the pawn is dead
+            if (pawn.Dead)
+                return "VPWE.NotAllowedDead".Translate(pawn.Named("PAWN"));
+
+            // Check if pawn has no royalty tracker, or is below baron in seniority.
+            if (pawn.royalty == null || pawn.royalty.AllTitlesForReading.All(t => t.faction != Faction.OfEmpire || t.def.seniority < VPWE_DefOf.Baron.seniority))
+                return "VPWE.NotAllowedNoTitle".Translate(pawn.Named("PAWN"));
+
+            return AcceptanceReport.WasAccepted;
         }
     }
 }
