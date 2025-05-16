@@ -101,15 +101,18 @@ namespace VanillaPersonaWeaponsExpanded
 
         private void OpenChooseDialog(ThingDef weaponDef)
         {
-            Find.LetterStack.RemoveLetter(this);
             this.tickWhenOpened = Find.TickManager.TicksGame;
             var weapon = ThingMaker.MakeThing(weaponDef, GenStuff.DefaultStuffFor(weaponDef));
             var comp = weapon.TryGetComp<CompGraphicCustomization>();
-            // If the weapon doesn't have customization comp, send the weapon and return early. No point in doing anything else.
+            // If the weapon doesn't have customization comp, show confirmation dialog and return early. No point in doing anything else.
             if (comp == null)
             {
-                Dialog_ChoosePersonaWeapon.SendWeapon(pawn, weapon.TryGetComp<CompBladelinkWeapon>(), weapon);
-                RemoveAndResolveLetter();
+                var dialog = Dialog_MessageBox.CreateConfirmation("VPWE.NoCustomizationWeapon".Translate(weaponDef.Named("WEAPON")).CapitalizeFirst(), () =>
+                {
+                    if (Dialog_ChoosePersonaWeapon.SendWeapon(pawn, weapon.TryGetComp<CompBladelinkWeapon>(), weapon))
+                        RemoveAndResolveLetter();
+                });
+                Find.WindowStack.Add(dialog);
                 return;
             }
 
@@ -132,7 +135,7 @@ namespace VanillaPersonaWeaponsExpanded
             Scribe_References.Look(ref pawn, "pawn");
         }
 
-        private void RemoveAndResolveLetter()
+        public void RemoveAndResolveLetter()
         {
             Current.Game.GetComponent<GameComponent_PersonaWeapons>().unresolvedLetters.Remove(this);
             Find.LetterStack.RemoveLetter(this);

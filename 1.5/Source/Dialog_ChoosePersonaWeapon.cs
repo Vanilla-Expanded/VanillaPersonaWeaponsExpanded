@@ -94,38 +94,83 @@ namespace VanillaPersonaWeaponsExpanded
             var confirmRect = new Rect((inRect.width / 2f) + 5, inRect.height - 32, 250, 32);
             DrawConfirmButton(confirmRect, "VPWE.ClaimFor".Translate(pawn.Named("PAWN")), delegate
             {
-                this.comp.texVariantsToCustomize = this.currentVariants;
-                this.comp.Customize();
-                if (compGeneratedName != null)
+                var (position, map) = TryFindDropSpot(pawn);
+
+                // Rather than customizing every time the button is called,
+                // first check if we're actually able to deliver the weapon.
+                if (!position.IsValid)
                 {
-                    compGeneratedName.name = currentName;
+                    NoDeliverySpotFoundMessage(pawn, currentWeapon);
                 }
-                var compBladelink = currentWeapon.TryGetComp<CompBladelinkWeapon>();
-                compBladelink.traits.Clear();
-                compBladelink.traits.Add(this.currentWeaponTrait);
-                if (comp is CompGraphicCustomization_PsychicWeapon compPsychicWeapon)
+                else
                 {
-                    compPsychicWeapon.ability = currentPsycast;
+                    this.comp.texVariantsToCustomize = this.currentVariants;
+                    this.comp.Customize();
+                    if (compGeneratedName != null)
+                    {
+                        compGeneratedName.name = currentName;
+                    }
+                    var compBladelink = currentWeapon.TryGetComp<CompBladelinkWeapon>();
+                    compBladelink.traits.Clear();
+                    compBladelink.traits.Add(this.currentWeaponTrait);
+                    if (comp is CompGraphicCustomization_PsychicWeapon compPsychicWeapon)
+                    {
+                        compPsychicWeapon.ability = currentPsycast;
+                    }
+
+                    if (SendWeapon(pawn, compBladelink, currentWeapon, map, position))
+                    {
+                        choiceLetter.RemoveAndResolveLetter();
+                        this.Close();
+                    }
                 }
-                SendWeapon(pawn, compBladelink, currentWeapon); 
-                Current.Game.GetComponent<GameComponent_PersonaWeapons>().unresolvedLetters.Remove(choiceLetter);
-                Find.Archive.Remove(choiceLetter);
-                this.Close();
             });
         }
 
-        public static void SendWeapon(Pawn receiver, CompBladelinkWeapon compBladelink, Thing weaponToSend)
+        public static bool SendWeapon(Pawn receiver, CompBladelinkWeapon compBladelink, Thing weaponToSend)
+        {
+            var (position, map) = TryFindDropSpot(receiver);
+            if (!position.IsValid)
+            {
+                NoDeliverySpotFoundMessage(receiver, weaponToSend);
+                return false;
+            }
+
+            return SendWeapon(receiver, compBladelink, weaponToSend, map, position);
+        }
+
+        public static bool SendWeapon(Pawn receiver, CompBladelinkWeapon compBladelink, Thing weaponToSend, Map map, IntVec3 position)
         {
             compBladelink.CodeFor(receiver);
-            var map = receiver.MapHeld ?? Find.AnyPlayerHomeMap;
-            var qualityComp = weaponToSend.TryGetComp<CompQuality>();
-            if (qualityComp != null)
-            {
-                qualityComp.SetQuality(QualityCategory.Excellent, ArtGenerationContext.Outsider);
-            }
-            DropPodUtility.DropThingsNear(map.Center, map, new List<Thing> { weaponToSend }, 110, canInstaDropDuringInit: false, leaveSlag: true);
+            weaponToSend.TryGetComp<CompQuality>()?.SetQuality(QualityCategory.Excellent, ArtGenerationContext.Outsider);
+            DropPodUtility.DropThingsNear(position, map, new List<Thing> { weaponToSend }, canInstaDropDuringInit: false, leaveSlag: true);
             Find.LetterStack.ReceiveLetter("VPWE.ReceivedWeaponTitle".Translate(), "VPWE.ReceivedWeaponDesc".Translate(weaponToSend.Label, receiver.Named("PAWN")), LetterDefOf.NeutralEvent, weaponToSend);
+            return true;
         }
+
+        private static (IntVec3, Map) TryFindDropSpot(Pawn receiver)
+        {
+            var map = receiver.MapHeld;
+
+            // If a pawn has a map, try dropping to the same map (near them)
+            if (map != null)
+            {
+                if (DropCellFinder.TryFindDropSpotNear(receiver.PositionHeld, map, out var position, false, false, false))
+                    return (position, map);
+            }
+            else
+            {
+                // If pawn has no map, try using any player map
+                map = Find.AnyPlayerHomeMap;
+                if (map == null)
+                    return (IntVec3.Invalid, null);
+            }
+
+            return (DropCellFinder.TradeDropSpot(map), map);
+        }
+
+        private static void NoDeliverySpotFoundMessage(Pawn receiver, Thing weaponToSend)
+            => Messages.Message("VPWE.NoDeliverySpotFound".Translate(receiver.Named("PAWN"), weaponToSend.def.Named("WEAPON")), MessageTypeDefOf.RejectInput, false);
 
         protected override void DrawCustomizationArea(Rect itemTextureRect)
         {

@@ -18,4 +18,6 @@ The weapon will arrive immediately via drop pod and will be bound to {PAWN_nameD
 	<VPWE.NotAllowedDead>{PAWN_labelShort} is dead</VPWE.NotAllowedDead>
 	<VPWE.NotAllowedNoTitle>{PAWN_labelShort} no longer has the required title</VPWE.NotAllowedNoTitle>
 	<VPWE.NotPlayerFaction>{PAWN_labelShort} is no longer part of your faction</VPWE.NotPlayerFaction>
+	<VPWE.NoCustomizationWeapon>{WEAPON_label} cannot be customized and will be delivered with one or more random traits.\n\nDo you want to continue?</VPWE.NoCustomizationWeapon>
+	<VPWE.NoDeliverySpotFound>Could not find a spot to deliver {WEAPON_label} for {PAWN_labelShort}.</VPWE.NoDeliverySpotFound>
 </LanguageData>
