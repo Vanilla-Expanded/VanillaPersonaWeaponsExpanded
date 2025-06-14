@@ -1,7 +1,7 @@
 ﻿using HarmonyLib;
 using System.Reflection;
 using Verse;
-using VFECore.Abilities;
+using VEF.Abilities;
 
 namespace VanillaPersonaWeaponsExpanded
 {

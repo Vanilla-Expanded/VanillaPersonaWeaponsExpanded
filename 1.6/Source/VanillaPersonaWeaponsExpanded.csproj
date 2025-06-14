@@ -25,9 +25,9 @@
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
+    <DebugType>none</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>..\Assemblies\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -38,7 +38,7 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="GraphicCustomization">
-      <HintPath>..\..\..\VanillaExpandedFramework\1.4\Assemblies\GraphicCustomization.dll</HintPath>
+      <HintPath>..\..\..\VanillaExpandedFramework\1.5\Assemblies\GraphicCustomization.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
@@ -298,11 +298,11 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="VanillaPsycastsExpanded">
-      <HintPath>..\..\..\VanillaPsycastsExpanded\1.4\Assemblies\VanillaPsycastsExpanded.dll</HintPath>
+      <HintPath>..\..\..\VanillaPsycastsExpanded\1.5\Assemblies\VanillaPsycastsExpanded.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="VFECore">
-      <HintPath>..\..\..\VanillaExpandedFramework\1.4\Assemblies\VFECore.dll</HintPath>
+    <Reference Include="VEF">
+      <HintPath>..\..\..\VanillaExpandedFramework\1.6\Assemblies\VEF.dll</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>
@@ -321,13 +321,13 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Krafs.Publicizer">
-      <Version>2.2.1</Version>
+      <Version>2.3.0</Version>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Lib.Harmony">
       <ExcludeAssets>runtime</ExcludeAssets>
-      <Version>2.2.2</Version>
+      <Version>2.3.6</Version>
       <IncludeAssets>compile; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
   </ItemGroup>

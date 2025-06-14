@@ -1,0 +1,210 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+	<Operation Class="PatchOperationFindMod">
+		<mods>
+			<li>Vanilla Factions Expanded - Empire</li>
+		</mods>
+		<match Class="PatchOperationSequence">
+			<operations>
+
+				<!-- remove the red tint color from bladelink weapons -->
+				
+				<li Class="PatchOperationRemove">
+					<xpath>/Defs/ThingDef[defName="VFEE_MeleeWeapon_ToxbladeBladelink"]/graphicData/color</xpath>
+				</li>
+				
+				<!-- Toxblade -->
+				
+				<li Class="PatchOperationConditional">
+					<xpath>/Defs/ThingDef[defName="VFEE_MeleeWeapon_ToxbladeBladelink"]/comps</xpath>
+					<nomatch Class="PatchOperationAdd">
+						<xpath>/Defs/ThingDef[defName="VFEE_MeleeWeapon_ToxbladeBladelink"]</xpath>
+						<value>
+							<comps/>
+						</value>
+					</nomatch>
+				</li>
+
+				<li Class="PatchOperationAdd">
+					<xpath>/Defs/ThingDef[defName="VFEE_MeleeWeapon_ToxbladeBladelink"]/comps</xpath>
+					<value>
+						<li Class="GraphicCustomization.CompProperties_GraphicCustomization">
+							<customizable>true</customizable>
+							<customizationTitle>Persona Weapon Customization</customizationTitle>
+							<graphics>
+								<li>
+									<name>Blade</name>
+									<texVariants>
+									
+										<li>
+											<texName>Absolute</texName>
+											<outline>Toxblade/Toxblade_Blade_Absolute_Outline</outline>
+											<texture>Toxblade/Toxblade_Blade_Absolute</texture>
+										</li>
+										<li>
+											<texName>Exponential</texName>
+											<outline>Toxblade/Toxblade_Blade_Exponential_Outline</outline>
+											<texture>Toxblade/Toxblade_Blade_Exponential</texture>
+										</li>
+										<li>
+											<texName>Parabolic</texName>
+											<outline>Toxblade/Toxblade_Blade_Parabolic_Outline</outline>
+											<texture>Toxblade/Toxblade_Blade_Parabolic</texture>
+										</li>
+										<li>
+											<texName>Quadratic</texName>
+											<outline>Toxblade/Toxblade_Blade_Quadratic_Outline</outline>
+											<texture>Toxblade/Toxblade_Blade_Quadratic</texture>
+										</li>
+										<li>
+											<texName>Quartic</texName>
+											<outline>Toxblade/Toxblade_Blade_Quartic_Outline</outline>
+											<texture>Toxblade/Toxblade_Blade_Quartic</texture>
+										</li>
+										<li>
+											<texName>Rectangular</texName>
+											<outline>Toxblade/Toxblade_Blade_Rectangular_Outline</outline>
+											<texture>Toxblade/Toxblade_Blade_Rectangular</texture>
+										</li>
+										<li>
+											<texName>Serpentine</texName>
+											<outline>Toxblade/Toxblade_Blade_Serpentine_Outline</outline>
+											<texture>Toxblade/Toxblade_Blade_Serpentine</texture>
+										</li>
+										<li>
+											<texName>Three-Phase</texName>
+											<outline>Toxblade/Toxblade_Blade_Three-Phase_Outline</outline>
+											<texture>Toxblade/Toxblade_Blade_Three-Phase</texture>
+										</li>
+										<li>
+											<texName>Trapezoid</texName>
+											<outline>Toxblade/Toxblade_Blade_Trapezoid_Outline</outline>
+											<texture>Toxblade/Toxblade_Blade_Trapezoid</texture>
+										</li>
+										<li>
+											<texName>Trinomial</texName>
+											<outline>Toxblade/Toxblade_Blade_Trinomial_Outline</outline>
+											<texture>Toxblade/Toxblade_Blade_Trinomial</texture>
+										</li>
+									</texVariants>
+								</li>
+								<li>
+									<name>Grip</name>
+									<texVariants>
+										<li>
+											<texName>Bladed</texName>
+											<outline>Toxblade/Toxblade_Grip_Bladed_Outline</outline>
+											<texture>Toxblade/Toxblade_Grip_Bladed</texture>
+										</li>
+										<li>
+											<texName>Guarded</texName>
+											<outline>Toxblade/Toxblade_Grip_Guarded_Outline</outline>
+											<texture>Toxblade/Toxblade_Grip_Guarded</texture>
+										</li>
+										<li>
+											<texName>Hatched</texName>
+											<outline>Toxblade/Toxblade_Grip_Hatched_Outline</outline>
+											<texture>Toxblade/Toxblade_Grip_Hatched</texture>
+										</li>
+										<li>
+											<texName>Inverse</texName>
+											<outline>Toxblade/Toxblade_Grip_Inverse_Outline</outline>
+											<texture>Toxblade/Toxblade_Grip_Inverse</texture>
+										</li>
+										<li>
+											<texName>Looped</texName>
+											<outline>Toxblade/Toxblade_Grip_Looped_Outline</outline>
+											<texture>Toxblade/Toxblade_Grip_Looped</texture>
+										</li>
+										<li>
+											<texName>Ornate</texName>
+											<outline>Toxblade/Toxblade_Grip_Ornate_Outline</outline>
+											<texture>Toxblade/Toxblade_Grip_Ornate</texture>
+										</li>
+										<li>
+											<texName>Squat</texName>
+											<outline>Toxblade/Toxblade_Grip_Squat_Outline</outline>
+											<texture>Toxblade/Toxblade_Grip_Squat</texture>
+										</li>
+										<li>
+											<texName>Threaded</texName>
+											<outline>Toxblade/Toxblade_Grip_Threaded_Outline</outline>
+											<texture>Toxblade/Toxblade_Grip_Threaded</texture>
+										</li>
+										<li>
+											<texName>Transverse</texName>
+											<outline>Toxblade/Toxblade_Grip_Transverse_Outline</outline>
+											<texture>Toxblade/Toxblade_Grip_Transverse</texture>
+										</li>
+										<li>
+											<texName>Weighted</texName>
+											<outline>Toxblade/Toxblade_Grip_Weighted_Outline</outline>
+											<texture>Toxblade/Toxblade_Grip_Weighted</texture>
+										</li>
+									</texVariants>
+								</li>
+								<li>
+									<name>Guard</name>
+									<texVariants>
+										<li>
+											<texName>Accipiter</texName>
+											<outline>Toxblade/Toxblade_Guard_Accipiter_Outline</outline>
+											<texture>Toxblade/Toxblade_Guard_Accipiter</texture>
+										</li>
+										<li>
+											<texName>Anatis</texName>
+											<outline>Toxblade/Toxblade_Guard_Anatis_Outline</outline>
+											<texture>Toxblade/Toxblade_Guard_Anatis</texture>
+										</li>
+										<li>
+											<texName>Chiroptera</texName>
+											<outline>Toxblade/Toxblade_Guard_Chiroptera_Outline</outline>
+											<texture>Toxblade/Toxblade_Guard_Chiroptera</texture>
+										</li>
+										<li>
+											<texName>Cygnus</texName>
+											<outline>Toxblade/Toxblade_Guard_Cygnus_Outline</outline>
+											<texture>Toxblade/Toxblade_Guard_Cygnus</texture>
+										</li>
+										<li>
+											<texName>Larum</texName>
+											<outline>Toxblade/Toxblade_Guard_Larum_Outline</outline>
+											<texture>Toxblade/Toxblade_Guard_Larum</texture>
+										</li>
+										<li>
+											<texName>Milvus</texName>
+											<outline>Toxblade/Toxblade_Guard_Milvus_Outline</outline>
+											<texture>Toxblade/Toxblade_Guard_Milvus</texture>
+										</li>
+										<li>
+											<texName>Passer</texName>
+											<outline>Toxblade/Toxblade_Guard_Passer_Outline</outline>
+											<texture>Toxblade/Toxblade_Guard_Passer</texture>
+										</li>
+										<li>
+											<texName>Perdix</texName>
+											<outline>Toxblade/Toxblade_Guard_Perdix_Outline</outline>
+											<texture>Toxblade/Toxblade_Guard_Perdix</texture>
+										</li>
+										<li>
+											<texName>Vermis</texName>
+											<outline>Toxblade/Toxblade_Guard_Vermis_Outline</outline>
+											<texture>Toxblade/Toxblade_Guard_Vermis</texture>
+										</li>
+										<li>
+											<texName>Vombati</texName>
+											<outline>Toxblade/Toxblade_Guard_Vombati_Outline</outline>
+											<texture>Toxblade/Toxblade_Guard_Vombati</texture>
+										</li>
+									</texVariants>
+								</li>
+							</graphics>
+						</li>
+					</value>
+				</li>
+				
+			</operations>
+		</match>
+	</Operation>
+
+</Patch>
