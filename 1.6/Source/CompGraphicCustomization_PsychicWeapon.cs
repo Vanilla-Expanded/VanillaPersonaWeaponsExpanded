@@ -1,8 +1,8 @@
-﻿using GraphicCustomization;
-using RimWorld;
+﻿using RimWorld;
 using System.Collections.Generic;
 using Verse;
 using VEF.Abilities;
+using VEF.Graphics;
 using AbilityDef = VEF.Abilities.AbilityDef;
 
 namespace VanillaPersonaWeaponsExpanded

@@ -1,10 +1,9 @@
-﻿using GraphicCustomization;
-using RimWorld;
+﻿using RimWorld;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Verse;
-using VEF.Abilities;
+using VEF.Graphics;
 using AbilityDef = VEF.Abilities.AbilityDef;
 
 namespace VanillaPersonaWeaponsExpanded
@@ -32,7 +31,8 @@ namespace VanillaPersonaWeaponsExpanded
             this.choiceLetter = choiceLetter;
             this.allWeaponTraits = DefDatabase<WeaponTraitDef>.AllDefsListForReading;
             this.currentWeaponTrait = allWeaponTraits.RandomElement();
-            if (ModCompatibility.VPELoaded && comp is CompGraphicCustomization_PsychicWeapon)
+            // Initialize even if the current weapon comp is not psychic weapon, as we can switch to those weapons later on
+            if (ModCompatibility.VPELoaded)
             {
                 allPsycasts = ModCompatibility.AllPsycasts();
                 currentPsycast = allPsycasts.RandomElement();
@@ -82,7 +82,7 @@ namespace VanillaPersonaWeaponsExpanded
             Rect viewArea = new Rect(inRect.x, outerRect.y, inRect.width - 16, height);
             Rect itemTextureRect = new Rect(inRect.x + 10, viewArea.y, 250, 250);
             DrawItem(itemTextureRect);
-            Widgets.BeginScrollView(outerRect, ref scrollPosition, viewArea, true);
+            Widgets.BeginScrollView(outerRect, ref scrollPosition, viewArea);
             DrawCustomizationArea(itemTextureRect);
             Widgets.EndScrollView();
 
@@ -250,8 +250,8 @@ namespace VanillaPersonaWeaponsExpanded
             Widgets.Label(selectionRect, title);
             var floatMenuButtonsRect = new Rect(selectionRect.x, selectionRect.yMax, floatMenuWidth, 32);
             MakeFloatOptionButtons(floatMenuButtonsRect, leftAction: leftAction, centerAction: centerAction, 
-                centerButtonName: currentItem.LabelCap, rightAction: rightAction);
-            var description = currentItem.LabelCap + ": " + currentItem.description.CapitalizeFirst();
+                centerButtonName: currentItem?.LabelCap ?? "null", rightAction: rightAction);
+            var description = (currentItem?.LabelCap ?? "null") + ": " + (currentItem?.description.CapitalizeFirst() ?? "null");
             var height = Text.CalcHeight(description, floatMenuButtonsRect.width);
             var descriptionRect = new Rect(floatMenuButtonsRect.x, floatMenuButtonsRect.yMax + 15, floatMenuButtonsRect.width, height);
             Widgets.Label(descriptionRect, description);

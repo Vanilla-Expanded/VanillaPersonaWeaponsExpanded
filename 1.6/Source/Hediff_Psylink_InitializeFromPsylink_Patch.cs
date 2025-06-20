@@ -17,17 +17,13 @@ namespace VanillaPersonaWeaponsExpanded
         public static void Postfix(Hediff_Psylink psylink)
         {
             var equipment = psylink.pawn.equipment?.Primary;
-            if (equipment != null)
+            var comp = equipment?.GetComp<CompGraphicCustomization_PsychicWeapon>();
+            if (comp != null)
             {
-                var comp = equipment.GetComp<CompGraphicCustomization_PsychicWeapon>();
-                if (comp != null)
+                var compAbilities = psylink.pawn.GetComp<CompAbilities>();
+                if (compAbilities?.HasAbility(comp.ability) is false)
                 {
-                    var compAbilities = psylink.pawn.GetComp<CompAbilities>();
-                    if (comp == null) return;
-                    if (compAbilities.HasAbility(comp.ability) is false)
-                    {
-                        comp.TryGiveAbility(psylink.pawn);
-                    }
+                    comp.TryGiveAbility(psylink.pawn);
                 }
             }
         }

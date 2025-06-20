@@ -1,8 +1,8 @@
-﻿using GraphicCustomization;
-using RimWorld;
+﻿using RimWorld;
 using RimWorld.Planet;
 using System;
 using UnityEngine;
+using VEF;
 using Verse;
 using Verse.Sound;
 
@@ -117,10 +117,10 @@ namespace VanillaPersonaWeaponsExpanded
                 value.a *= color.a;
                 Widgets.DefIcon(rect3, shownItem, null, 1f, thingStyleDef, drawPlaceHolderIcon, value, null, graphicIndexOverride);
             }
-            else if ((bool)itemIcon)
+            else if ((bool)iconTex)
             {
                 rect3.y -= 5f;
-                Widgets.DrawTextureFitted(rect3, itemIcon, 0.8f, new Vector2(1f, 1f), iconTexCoords);
+                Widgets.DrawTextureFitted(rect3, iconTex, 0.8f, new Vector2(1f, 1f), iconTexCoords);
             }
             else if (iconThing != null)
             {
