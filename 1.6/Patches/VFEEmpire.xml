@@ -28,7 +28,7 @@
 				<li Class="PatchOperationAdd">
 					<xpath>/Defs/ThingDef[defName="VFEE_MeleeWeapon_ToxbladeBladelink"]/comps</xpath>
 					<value>
-						<li Class="GraphicCustomization.CompProperties_GraphicCustomization">
+						<li Class="VEF.Graphics.CompProperties_GraphicCustomization">
 							<customizable>true</customizable>
 							<customizationTitle>Persona Weapon Customization</customizationTitle>
 							<graphics>

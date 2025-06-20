@@ -28,7 +28,7 @@
 				<li Class="PatchOperationAdd">
 					<xpath>/Defs/ThingDef[defName="MeleeWeapon_MonoSwordBladelink"]/comps</xpath>
 					<value>
-						<li Class="GraphicCustomization.CompProperties_GraphicCustomization">
+						<li Class="VEF.Graphics.CompProperties_GraphicCustomization">
 							<customizable>true</customizable>
 							<customizationTitle>Persona Weapon Customization</customizationTitle>
 							<graphics>
@@ -372,7 +372,7 @@
 				<li Class="PatchOperationAdd">
 					<xpath>/Defs/ThingDef[defName="MeleeWeapon_PlasmaSwordBladelink"]/comps</xpath>
 					<value>
-						<li Class="GraphicCustomization.CompProperties_GraphicCustomization">
+						<li Class="VEF.Graphics.CompProperties_GraphicCustomization">
 							<customizable>true</customizable>
 							<customizationTitle>Persona Weapon Customization</customizationTitle>
 							<graphics>
@@ -637,7 +637,7 @@
 				<li Class="PatchOperationAdd">
 					<xpath>/Defs/ThingDef[defName="MeleeWeapon_ZeusHammerBladelink"]/comps</xpath>
 					<value>
-						<li Class="GraphicCustomization.CompProperties_GraphicCustomization">
+						<li Class="VEF.Graphics.CompProperties_GraphicCustomization">
 							<customizable>true</customizable>
 							<customizationTitle>Persona Weapon Customization</customizationTitle>
 							<graphics>

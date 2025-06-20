@@ -23,7 +23,6 @@
 			<li>MeleeBlunt</li>
 			<li>Ultratech</li>
 		</weaponClasses>
-		<costStuffCount>50</costStuffCount>
 		<statBases>
 			<MarketValue>3000</MarketValue>
 			<Mass>1.2</Mass>
@@ -45,7 +44,7 @@
 			</li>
 		</tools>
 		<comps>
-			<li Class="GraphicCustomization.CompProperties_GraphicCustomization">
+			<li Class="VEF.Graphics.CompProperties_GraphicCustomization">
 				<compClass>VanillaPersonaWeaponsExpanded.CompGraphicCustomization_PsychicWeapon</compClass>
 				<customizable>true</customizable>
 				<customizationTitle>Persona Weapon Customization</customizationTitle>
