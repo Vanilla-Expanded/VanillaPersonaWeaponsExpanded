@@ -5,6 +5,7 @@ using UnityEngine;
 using Verse;
 using VEF.Graphics;
 using AbilityDef = VEF.Abilities.AbilityDef;
+using System.Linq;
 
 namespace VanillaPersonaWeaponsExpanded
 {
@@ -29,7 +30,7 @@ namespace VanillaPersonaWeaponsExpanded
             this.allWeapons = allWeapons;
             this.currentWeapon = comp.parent;
             this.choiceLetter = choiceLetter;
-            this.allWeaponTraits = DefDatabase<WeaponTraitDef>.AllDefsListForReading;
+            this.allWeaponTraits = DefDatabase<WeaponTraitDef>.AllDefsListForReading.Where(x => x.weaponCategory== WeaponCategoryDefOf.BladeLink).ToList();
             this.currentWeaponTrait = allWeaponTraits.RandomElement();
             // Initialize even if the current weapon comp is not psychic weapon, as we can switch to those weapons later on
             if (ModCompatibility.VPELoaded)
